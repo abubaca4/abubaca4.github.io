@@ -63,8 +63,8 @@
 		var fileInput = document.getElementById('file_select');
 		
 		fileInput.addEventListener("change", async function (evt) {
-			await CryptoJS_Get_Sha1_FromFile(inputFile);
-			await getFileHash_crypto(inputFile, 'SHA-1');
+			await CryptoJS_Get_Sha1_FromFile(fileInput.files[0]);
+			await getFileHash_crypto(fileInput.files[0], 'SHA-1');
 		});
 		</script>
 	</div>
