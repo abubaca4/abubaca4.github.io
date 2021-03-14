@@ -32,11 +32,11 @@
 			return CryptoJS.lib.WordArray.create(a, i8a.length);
 		}
 
-		async function getSha1CryptoJS(inputArrayBuffer){
+		function getSha1CryptoJS(inputArrayBuffer){
 			//преобразование к формату CryptoJS
 			const inputWordArray = arrayBufferToWordArray(arrayBuffer);
 			//получение хеша
-			const hash = CryptoJS.SHA1(inputWordArray)ж
+			const hash = CryptoJS.SHA1(inputWordArray);
 			return hash;
 		}
 
@@ -53,7 +53,7 @@
 			reader.onload = (function () {
 				return async function (e) {
 					document.getElementById('id_crypto_subtle').value = await getHash_crypto(e.target.result, 'SHA-1');
-					document.getElementById('id_crypto_js').value = await getSha1CryptoJS(e.target.result);
+					document.getElementById('id_crypto_js').value = getSha1CryptoJS(e.target.result);
 					};
 			})();
 			reader.readAsArrayBuffer(inputFile);
