@@ -31,40 +31,38 @@
 			}
 			return CryptoJS.lib.WordArray.create(a, i8a.length);
 		}
-		
-		async function CryptoJS_Get_Sha1_FromFile(inputFile) {
-			var reader = new FileReader();
-			reader.onload = (function () {
-				return async function (e) {
-					const arrayBuffer = e.target.result;
-					const hash = CryptoJS.SHA1(arrayBufferToWordArray(arrayBuffer));
-					document.getElementById('id_crypto_js').value = hash;
-				};
-			})();
-			//чтение файла
-			reader.readAsArrayBuffer(inputFile);
+
+		async function getSha1CryptoJS(inputArrayBuffer){
+			//преобразование к формату CryptoJS
+			const inputWordArray = arrayBufferToWordArray(arrayBuffer);
+			//получение хеша
+			const hash = CryptoJS.SHA1(inputWordArray)ж
+			return hash;
 		}
-		
-		async function getFileHash_crypto(inputFile, hashAlgorithm) {
+
+		async function getHash_crypto(inputArrayBuffer, hashAlgorithm) {
+			//вычисление хеша встроенной функцией браузера
+			const result = await crypto.subtle.digest(hashAlgorithm, inputArrayBuffer);
+			//преобразование к строке
+			const stringHash = Array.prototype.map.call(new Uint8Array(result), x => (('00' + x.toString(16)).slice(-2))).join('');
+			return stringHash;
+		}
+
+		async function getFileHash(inputFile) {
 			var reader = new FileReader();
-			//назначение действия после полного чтения файла
 			reader.onload = (function () {
 				return async function (e) {
-					//создание хеша средствами браузера может не поддерживаться в старых браузерах(или если соединение не https)
-					let result = await crypto.subtle.digest(hashAlgorithm, e.target.result);
-					//преобразование ArrayBuffer к строке
-					document.getElementById('id_crypto_subtle').value = Array.prototype.map.call(new Uint8Array(result), x => (('00' + x.toString(16)).slice(-2))).join('');
-				};
+					document.getElementById('id_crypto_subtle').value = await getHash_crypto(e.target.result, 'SHA-1');
+					document.getElementById('id_crypto_js').value = await getSha1CryptoJS(e.target.result);
+					};
 			})();
-			//чтение файла
 			reader.readAsArrayBuffer(inputFile);
 		}
 		
 		var fileInput = document.getElementById('file_select');
 		
 		fileInput.addEventListener("change", async function (evt) {
-			await CryptoJS_Get_Sha1_FromFile(fileInput.files[0]);
-			await getFileHash_crypto(fileInput.files[0], 'SHA-1');
+			await getFileHash(fileInput.files[0]);
 		});
 		</script>
 	</div>
