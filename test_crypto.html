@@ -34,7 +34,7 @@
 
 		function getSha1CryptoJS(inputArrayBuffer){
 			//преобразование к формату CryptoJS
-			const inputWordArray = arrayBufferToWordArray(arrayBuffer);
+			const inputWordArray = arrayBufferToWordArray(inputArrayBuffer);
 			//получение хеша
 			const hash = CryptoJS.SHA1(inputWordArray);
 			return hash;
