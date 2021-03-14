@@ -14,6 +14,7 @@
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.0.0/crypto-js.min.js" 
 		integrity="sha512-nOQuvD9nKirvxDdvQ9OMqe2dgapbPB7vYAMrzJihw5m+aNcf0dX53m6YxM4LgA9u8e9eg9QX+/+mPu8kCNpV2A==" 
 		crossorigin="anonymous"></script>
+	<script src="/crypto_code.js"></script>
 </head>
 	<div class="container-fluid">
 		<label for="file_select">Выбор файла</label>
@@ -22,48 +23,5 @@
 		<input type="text" name="ecg_id_field" class="form-control" id="id_crypto_subtle">
 		<label for="id_crypto_js">SHA-1 через CryptoJs</label>
 		<input type="text" name="ecg_id_field" class="form-control" id="id_crypto_js">
-		<script>
-		function arrayBufferToWordArray(ab) {
-			var i8a = new Uint8Array(ab);
-			var a = [];
-			for (var i = 0; i < i8a.length; i += 4) {
-				a.push(i8a[i] << 24 | i8a[i + 1] << 16 | i8a[i + 2] << 8 | i8a[i + 3]);
-			}
-			return CryptoJS.lib.WordArray.create(a, i8a.length);
-		}
-
-		function getSha1CryptoJS(inputArrayBuffer){
-			//преобразование к формату CryptoJS
-			const inputWordArray = arrayBufferToWordArray(inputArrayBuffer);
-			//получение хеша
-			const hash = CryptoJS.SHA1(inputWordArray);
-			return hash;
-		}
-
-		async function getHash_crypto(inputArrayBuffer, hashAlgorithm) {
-			//вычисление хеша встроенной функцией браузера
-			const result = await crypto.subtle.digest(hashAlgorithm, inputArrayBuffer);
-			//преобразование к строке
-			const stringHash = Array.prototype.map.call(new Uint8Array(result), x => (('00' + x.toString(16)).slice(-2))).join('');
-			return stringHash;
-		}
-
-		async function getFileHash(inputFile) {
-			var reader = new FileReader();
-			reader.onload = (function () {
-				return async function (e) {
-					document.getElementById('id_crypto_subtle').value = await getHash_crypto(e.target.result, 'SHA-1');
-					document.getElementById('id_crypto_js').value = getSha1CryptoJS(e.target.result);
-					};
-			})();
-			reader.readAsArrayBuffer(inputFile);
-		}
-		
-		var fileInput = document.getElementById('file_select');
-		
-		fileInput.addEventListener("change", async function (evt) {
-			await getFileHash(fileInput.files[0]);
-		});
-		</script>
 	</div>
 </html>
