@@ -17,4 +17,4 @@ function get_lcg() {
     return result;
 }
 
-document.getElementById("lcg_text_result").innerHTML = get_lcg().toString();
+document.getElementById("lcg_text_result").innerHTML = get_lcg().join("<br/>");
