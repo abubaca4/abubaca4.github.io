@@ -4,9 +4,9 @@ div#lcg_result {
 }
 
 div.row {
-    height: auto;
+    height: 100%;
 }
 
 div#lcg_text_result {
-    height: auto;
+    height: 100%;
 }
