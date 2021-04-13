@@ -24,10 +24,11 @@ function update_lcd() {
         x: data,
         type: 'histogram',
     };
-    Plotly.newPlot('lcg_gist_result', [trace], {
+    layout = {
         responsive: true,
         margin: { t: 0, b: 30, l: 10, r: 0 },
-    });
+    }
+    Plotly.newPlot('lcg_gist_result', [trace], layout);
 }
 
 update_lcd();
