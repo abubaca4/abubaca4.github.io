@@ -28,3 +28,8 @@ function update_lcd() {
 }
 
 update_lcd();
+
+a_data.addEventListener("change", update_lcd);
+c_data.addEventListener("change", update_lcd);
+interval_data.addEventListener("change", update_lcd);
+count_data.addEventListener("change", update_lcd);
