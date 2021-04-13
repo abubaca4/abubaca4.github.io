@@ -6,3 +6,7 @@ div#lcg_result {
 div.row {
     height: auto;
 }
+
+div#lcg_text_result {
+    height: auto;
+}
