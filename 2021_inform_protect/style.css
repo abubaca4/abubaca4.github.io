@@ -1,12 +1,8 @@
-div#lcg_result {
-    height: 100px;
-    overflow: hidden;
+#lcg_text_result {
+height: 100%;
+overflow-y: auto;
 }
 
-div#test_row {
-    height: 100%;
-}
-
-div#lcg_text_result {
-    height: 100%;
+#test_row {
+height: 100px;
 }
