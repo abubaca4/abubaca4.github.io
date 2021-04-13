@@ -26,7 +26,7 @@ function update_lcd() {
     };
     Plotly.newPlot('lcg_gist_result', [trace], {
         responsive: true,
-        margin: { t: 10, b: 10, l: 10, r: 10 },
+        margin: { t: 0, b: 30, l: 10, r: 0 },
     });
 }
 
