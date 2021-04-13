@@ -18,13 +18,15 @@ function get_lcg() {
 }
 
 function update_lcd() {
-    let data = get_lcg();
+    var data = get_lcg();
     document.getElementById("lcg_text_result").innerHTML = data.join("<br/>");
     var trace = {
         x: data,
         type: 'histogram',
     };
+    var parent_width = document.getElementById("lcg_gist_result").offsetWidth;
     layout = {
+        width: parent_width * 0.99,
         responsive: true,
         margin: { t: 0, b: 30, l: 10, r: 0 },
     }
