@@ -3,7 +3,7 @@ div#lcg_result {
     overflow: hidden;
 }
 
-div.row {
+div#test_row {
     height: 100%;
 }
 
