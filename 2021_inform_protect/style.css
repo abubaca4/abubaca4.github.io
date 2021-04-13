@@ -3,6 +3,6 @@ height: 100%;
 overflow-y: auto;
 }
 
-#test_row {
-height: 100px;
+.result_row {
+height: 500px;
 }

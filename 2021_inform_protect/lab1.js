@@ -18,7 +18,13 @@ function get_lcg() {
 }
 
 function update_lcd() {
-    document.getElementById("lcg_text_result").innerHTML = get_lcg().join("<br/>");
+    let data = get_lcg();
+    document.getElementById("lcg_text_result").innerHTML = data.join("<br/>");
+    var trace = {
+        x: data,
+        type: 'histogram',
+    };
+    Plotly.newPlot('lcg_gist_result', [trace]);
 }
 
 update_lcd();
