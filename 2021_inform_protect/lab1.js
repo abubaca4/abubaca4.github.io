@@ -25,8 +25,8 @@ function update_lcd() {
         type: 'histogram',
     };
     var parent_width = document.getElementById("lcg_gist_result").offsetWidth;
-    layout = {
-        width: parent_width * 0.99,
+    let layout = {
+        width: parent_width - 15,
         responsive: true,
         margin: { t: 0, b: 30, l: 10, r: 0 },
     }
