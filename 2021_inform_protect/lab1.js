@@ -95,3 +95,5 @@ count_data.addEventListener("change", function () {
     update_lcd();
     update_bbs();
 });
+p_data.addEventListener("change", update_bbs);
+q_data.addEventListener("change", update_bbs);
